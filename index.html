@@ -1,269 +1,265 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<style>
-    @page { size: A4 landscape; margin: 15mm 20mm; background-color: #f8fafc; }
-    body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; margin: 0; padding: 0; font-size: 9.5pt; line-height: 1.6; }
-    .document-header { background-color: #0f172a; color: #f8fafc; margin: -15mm -20mm 20px -20mm; padding: 25px 20mm; text-align: center; }
-    h1 { margin: 0; font-size: 18pt; letter-spacing: 0.5px; text-transform: uppercase; }
-    .subtitle { margin-top: 8px; font-size: 10pt; color: #94a3b8; }
-    h2 { color: #1d4ed8; border-left: 6px solid #1d4ed8; padding-left: 12px; margin-top: 25px; margin-bottom: 10px; font-size: 12pt; page-break-after: avoid; text-transform: uppercase; }
-
-    .legend { font-size: 8.5pt; color: #475569; margin-bottom: 18px; display: flex; gap: 25px; align-items: center; flex-wrap: wrap; background-color: #f1f5f9; padding: 8px 12px; border-radius: 6px; }
-    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-    .dot-good { background-color: #16a34a; }
-    .dot-danger { background-color: #dc2626; }
-
-    .mini-summary { font-size: 8.5pt; color: #1d4ed8; font-weight: 600; margin-bottom: 10px; background-color: #eff6ff; padding: 7px 12px; border-radius: 6px; border-left: 4px solid #1d4ed8; }
-
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    @page { size: A4 landscape; margin: 15mm 20mm; background-color: #f8fafc; }
+    body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; margin: 0; padding: 0; font-size: 9.5pt; line-height: 1.6; overflow-x: hidden; }
+    .document-header { background-color: #0f172a; color: #f8fafc; padding: 22px 16px; text-align: center; }
+    h1 { margin: 0; font-size: 16pt; letter-spacing: 0.5px; text-transform: uppercase; }
+    .subtitle { margin-top: 8px; font-size: 9.5pt; color: #94a3b8; }
+    h2 { color: #1d4ed8; border-left: 6px solid #1d4ed8; padding-left: 12px; margin-top: 25px; margin-bottom: 10px; font-size: 12pt; page-break-after: avoid; text-transform: uppercase; }
+    .page-content { padding: 0 16px; }
+
+    /* Tampilan print/PDF: proporsi A4 landscape, tanpa trik bleed (biar judul gak ke-clip) */
+    @media print {
+        body { overflow-x: visible; }
+        .document-header { padding: 25px 20mm; }
+        h1 { font-size: 18pt; }
+        .subtitle { font-size: 10pt; }
+        .page-content { padding: 0; }
+        .scroll-hint, .donate-fab-wrap { display: none; }
+    }
+
+    .legend { font-size: 8.5pt; color: #475569; margin-bottom: 18px; display: flex; gap: 25px; align-items: center; flex-wrap: wrap; background-color: #f1f5f9; padding: 8px 12px; border-radius: 6px; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+    .dot-good { background-color: #16a34a; }
+    .dot-danger { background-color: #dc2626; }
+
+    .mini-summary { font-size: 8.5pt; color: #1d4ed8; font-weight: 600; margin-bottom: 10px; background-color: #eff6ff; padding: 7px 12px; border-radius: 6px; border-left: 4px solid #1d4ed8; }
+
     .table-wrapper { overflow-x: auto; margin-bottom: 8px; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 6px; background-color: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05); min-width: 720px; }
-    th, td { border: 1px solid #cbd5e1; padding: 11px 12px; text-align: center; vertical-align: middle; }
-    th { background-color: #334155; color: #ffffff; font-weight: 700; font-size: 8.5pt; text-transform: uppercase; }
-    tr:nth-child(even) { background-color: #f1f5f9; }
-
-    .parameter-col { text-align: left; font-weight: 700; font-size: 9.8pt; background-color: #e2e8f0; width: 16%; position: sticky; left: 0; z-index: 2; }
-    th.parameter-col { background-color: #334155; color: #ffffff; z-index: 3; }
-
-    .status-good   { color: #15803d; font-weight: bold; }
-    .status-danger { color: #b91c1c; font-weight: bold; }
-    td.status-good    { background-color: #dcfce7; }
-    td.status-danger  { background-color: #fee2e2; }
-    span.status-good   { background-color: #dcfce7; padding: 1px 6px; border-radius: 4px; display: inline-block; }
-    span.status-danger { background-color: #fee2e2; padding: 1px 6px; border-radius: 4px; display: inline-block; }
-
-    .th-sub { font-size: 7.5pt; font-weight: normal; }
-    .time-row td { background-color: #e0e7ff !important; font-size: 8.5pt; color: #3730a3; font-weight: 600; }
-    .footnote { font-size: 7.8pt; color: #64748b; margin-top: -2px; margin-bottom: 18px; text-align: left; }
-
-    .conclusion-box { font-size: 9pt; color: #1e293b; margin-top: 20px; padding: 14px 16px; background-color: #f1f5f9; border-left: 6px solid #1d4ed8; }
-    .conclusion-box h3 { margin: 0 0 8px 0; font-size: 10pt; color: #0f172a; }
-    .conclusion-box ul { margin: 0; padding-left: 20px; }
-    .conclusion-box li { margin-bottom: 5px; }
-
-    /* ── DONATE FAB ── */
-    .donate-fab-wrap { position: fixed; right: 18px; bottom: 18px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; font-size: 9.5pt; }
-    .donate-fab { width: 52px; height: 52px; border-radius: 50%; background: #0f172a; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
-    .donate-fab span { display: block; width: 22px; height: 2px; background: #f8fafc; margin: 3px 0; border-radius: 2px; transition: all 0.25s ease; }
-    .donate-fab.open span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
-    .donate-fab.open span:nth-child(2) { opacity: 0; }
-    .donate-fab.open span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
-    .donate-menu { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); overflow: hidden; opacity: 0; transform: translateY(8px) scale(0.96); pointer-events: none; transition: all 0.18s ease; }
-    .donate-menu.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-    .donate-menu a { display: flex; align-items: center; gap: 8px; padding: 12px 16px; font-family: inherit; font-size: 10pt; font-weight: 700; color: #b91c1c; text-decoration: none; white-space: nowrap; }
-    .donate-menu a:active { background: #fef2f2; }
-    @media print { .donate-fab-wrap { display: none; } }
-</style>
-</head>
-<body>
-
-    <div class="document-header">
-        <h1>Hasil Test 3DMark Stress Test</h1>
-        <div class="subtitle">Integrasi Data 10 Juni (Case DIY) &amp; 20 Juni 2026 (A1 Modif, Legendary, Polosan)</div>
-    </div>
-
-    <div class="legend">
-        <span><span class="legend-dot dot-good"></span>Hijau = Hasil Terbaik di baris itu</span>
-        <span><span class="legend-dot dot-danger"></span>Merah = Hasil Terburuk di baris itu</span>
-    </div>
-
-    <!-- ══ SECTION 1: PERFORMA ══════════════════════════════════ -->
-    <h2>1. Hasil Performa (Skor &amp; Stabilitas)</h2>
-    <div class="mini-summary">🏆 Skor tertinggi → TH28 Legendary (10.900) · Skor terendah paling tinggi → TH28 A1 Modif (10.686) · Stabilitas terbaik → TH28 Case DIY (98.4%)</div>
-    <div class="table-wrapper">
-    <table>
-        <thead>
-            <tr>
-                <th class="parameter-col">Parameter Pengujian</th>
-                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">Kazura Z1 Pro+<br><span class="th-sub">Case DIY*</span></th>
-                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">TH28 Pro<br><span class="th-sub">Case DIY*</span></th>
-                <th title="Polosan (Tanpa Heatsink)">TH28 Pro<br><span class="th-sub">Polosan</span></th>
-                <th>TH28 Pro<br><span class="th-sub">Heatsink Legendary</span></th>
-                <th>TH28 Pro<br><span class="th-sub">Heatsink A1 Modif</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="time-row">
-                <td class="parameter-col">Tanggal &amp; Waktu Pengujian</td>
-                <td>10 Juni 2026<br>13:19–13:41 WIB</td>
-                <td>10 Juni 2026<br>13:46–14:07 WIB</td>
-                <td>20 Juni 2026<br>16:06–16:27 WIB</td>
-                <td>20 Juni 2026<br>16:43–17:04 WIB</td>
-                <td>20 Juni 2026<br>15:35–15:56 WIB</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Skor Tertinggi (Best Loop)</td>
-                <td>10.783</td>
-                <td>10.741</td>
-                <td>10.794</td>
-                <td class="status-good">10.900</td>
-                <td>10.871</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Skor Terendah (Lowest Loop)</td>
-                <td>10.590</td>
-                <td>10.573</td>
-                <td>10.533</td>
-                <td>10.625</td>
-                <td class="status-good">10.686</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Stabilitas Performa</td>
-                <td>98.2%</td>
-                <td class="status-good">98.4%</td>
-                <td>97.6%</td>
-                <td>97.5%</td>
-                <td>98.3%</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Arahkan kursor ke header kolom untuk keterangan lengkap.</div>
-
-    <!-- ══ SECTION 2: TERMODINAMIKA ═════════════════════════════ -->
-    <h2>2. Termodinamika (Pre-cooling &amp; Titik Didih)</h2>
-    <div class="mini-summary">🏆 Suhu akhir baterai terbaik → TH28 Polosan (37,0°C) · Suhu akhir CPU terbaik → TH28 Case DIY (43,8°C) · Delta CPU terbaik → TH28 A1 Modif (+11,1°C)</div>
-    <div class="table-wrapper">
-    <table>
-        <thead>
-            <tr>
-                <th class="parameter-col">Parameter Pengujian</th>
-                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">Kazura Z1 Pro+<br><span class="th-sub">Case DIY*</span></th>
-                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">TH28 Pro<br><span class="th-sub">Case DIY*</span></th>
-                <th title="Polosan (Tanpa Heatsink)">TH28 Pro<br><span class="th-sub">Polosan</span></th>
-                <th>TH28 Pro<br><span class="th-sub">Heatsink Legendary</span></th>
-                <th>TH28 Pro<br><span class="th-sub">Heatsink A1 Modif</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="time-row">
-                <td class="parameter-col">Tanggal &amp; Waktu Pengujian</td>
-                <td>10 Juni 2026<br>13:19–13:41 WIB</td>
-                <td>10 Juni 2026<br>13:46–14:07 WIB</td>
-                <td>20 Juni 2026<br>16:06–16:27 WIB</td>
-                <td>20 Juni 2026<br>16:43–17:04 WIB</td>
-                <td>20 Juni 2026<br>15:35–15:56 WIB</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Suhu Awal (Baterai | CPU)</td>
-                <td>29,2°C | 32,3°C</td>
-                <td>28,1°C | 31,5°C</td>
-                <td>29,0°C | 31,7°C</td>
-                <td>28,8°C | 32,9°C</td>
-                <td>29,6°C | 32,9°C</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Suhu Akhir Baterai</td>
-                <td class="status-danger">39,5°C</td>
-                <td>38,9°C</td>
-                <td class="status-good">37,0°C</td>
-                <td>37,7°C</td>
-                <td>37,6°C</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Suhu Akhir CPU</td>
-                <td>45,6°C</td>
-                <td class="status-good">43,8°C</td>
-                <td>45,1°C</td>
-                <td class="status-danger">46,0°C</td>
-                <td>44,0°C</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Lonjakan Panas (Delta)</td>
-                <td>Bat: +10,3°C<br><span class="status-danger">CPU: +13,3°C</span></td>
-                <td>Bat: +10,8°C<br>CPU: +12,3°C</td>
-                <td><span class="status-good">Bat: +8,0°C</span><br><span class="status-danger">CPU: +13,4°C</span></td>
-                <td>Bat: +8,9°C<br>CPU: +13,1°C</td>
-                <td><span class="status-good">Bat: +8,0°C</span><br><span class="status-good">CPU: +11,1°C</span></td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Arahkan kursor ke header kolom untuk keterangan lengkap.</div>
-
-    <!-- ══ SECTION 3: KONSUMSI DAYA ═════════════════════════════ -->
-    <h2>3. Konsumsi Daya</h2>
-    <div class="mini-summary">🏆 Paling irit (turun paling sedikit) → Kazura Case DIY &amp; TH28 A1 Modif, sama-sama turun 14%</div>
-    <div class="table-wrapper">
-    <table>
-        <thead>
-            <tr>
-                <th class="parameter-col">Parameter Pengujian</th>
-                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">Kazura Z1 Pro+<br><span class="th-sub">Case DIY*</span></th>
-                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">TH28 Pro<br><span class="th-sub">Case DIY*</span></th>
-                <th title="Polosan (Tanpa Heatsink)">TH28 Pro<br><span class="th-sub">Polosan</span></th>
-                <th>TH28 Pro<br><span class="th-sub">Heatsink Legendary</span></th>
-                <th>TH28 Pro<br><span class="th-sub">Heatsink A1 Modif</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="time-row">
-                <td class="parameter-col">Tanggal &amp; Waktu Pengujian</td>
-                <td>10 Juni 2026<br>13:19–13:41 WIB</td>
-                <td>10 Juni 2026<br>13:46–14:07 WIB</td>
-                <td>20 Juni 2026<br>16:06–16:27 WIB</td>
-                <td>20 Juni 2026<br>16:43–17:04 WIB</td>
-                <td>20 Juni 2026<br>15:35–15:56 WIB</td>
-            </tr>
-            <tr>
-                <td class="parameter-col">Konsumsi Baterai (20 Loop)</td>
-                <td class="status-good">Turun 14%<br>(74% ➔ 60%)</td>
-                <td class="status-danger">Turun 17%<br>(60% ➔ 43%)</td>
-                <td>Turun 15%<br>(63% ➔ 48%)</td>
-                <td class="status-danger">Turun 17%<br>(45% ➔ 28%)</td>
-                <td class="status-good">Turun 14%<br>(78% ➔ 64%)</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Arahkan kursor ke header kolom untuk keterangan lengkap.</div>
-
-    <div class="conclusion-box">
-        <h3>*Kesimpulan Mutlak</h3>
-        <ul>
-            <li>Konfigurasi termal paling superior secara keseluruhan: <strong>TH28 + Heatsink A1 Modif</strong>.</li>
-            <li>Mencatatkan Delta CPU terendah: <strong>+11,1°C</strong>.</li>
-            <li>Stabilitas performa sangat tinggi: <strong>98,3%</strong>.</li>
-            <li>Drainase baterai seefisien cooler 20W: <strong>turun 14%</strong>.</li>
-            <li>Catatan: <strong>Heatsink Legendary</strong> terbukti memiliki hambatan termal yang buruk untuk penyebaran jangka panjang (suhu akhir CPU tembus <strong>46,0°C</strong>).</li>
-        </ul>
-    </div>
-    <!-- ▼▼ Tombol Donate (hamburger toggle) ▼▼ -->
-    <div class="donate-fab-wrap">
-        <div class="donate-menu" id="donateMenu">
-            <a href="#" id="donateLink" target="_blank" rel="noopener noreferrer">❤️ Donate</a>
-        </div>
-        <button class="donate-fab" id="donateFab" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-    <script>
-        // 🔧 GANTI baris di bawah ini dengan path/URL foto donasi kamu
-        // Saran: taruh foto di repo yang sama, misal di folder "images/donate.jpg"
-        const DONATE_PHOTO_URL = "images/donate.png";
-
-        document.getElementById('donateLink').href = DONATE_PHOTO_URL;
-
-        const fab = document.getElementById('donateFab');
-        const menu = document.getElementById('donateMenu');
-
-        fab.addEventListener('click', function () {
-            fab.classList.toggle('open');
-            menu.classList.toggle('show');
-        });
-        document.getElementById('donateLink').addEventListener('click', function () {
-            fab.classList.remove('open');
-            menu.classList.remove('show');
-        });
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.donate-fab-wrap')) {
-                fab.classList.remove('open');
-                menu.classList.remove('show');
-            }
-        });
-    </script>
-    <!-- ▲▲ Tombol Donate ▲▲ -->
-
-</body>
+    .scroll-hint { font-size: 8pt; color: #94a3b8; font-style: italic; margin-bottom: 4px; text-align: right; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 6px; background-color: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05); min-width: 720px; }
+    th, td { border: 1px solid #cbd5e1; padding: 11px 12px; text-align: center; vertical-align: middle; }
+    th { background-color: #334155; color: #ffffff; font-weight: 700; font-size: 8.5pt; text-transform: uppercase; }
+    tr:nth-child(even) { background-color: #f1f5f9; }
+
+    .parameter-col { text-align: left; font-weight: 700; font-size: 9.8pt; background-color: #e2e8f0; width: 16%; position: sticky; left: 0; z-index: 2; }
+    th.parameter-col { background-color: #334155; color: #ffffff; z-index: 3; }
+
+    .status-good   { color: #15803d; font-weight: bold; }
+    .status-danger { color: #b91c1c; font-weight: bold; }
+    td.status-good    { background-color: #dcfce7; }
+    td.status-danger  { background-color: #fee2e2; }
+    span.status-good   { background-color: #dcfce7; padding: 1px 6px; border-radius: 4px; display: inline-block; }
+    span.status-danger { background-color: #fee2e2; padding: 1px 6px; border-radius: 4px; display: inline-block; }
+
+    .th-sub { font-size: 7.5pt; font-weight: normal; }
+    .time-row td { background-color: #e0e7ff !important; font-size: 8.5pt; color: #3730a3; font-weight: 600; }
+    .footnote { font-size: 7.8pt; color: #64748b; margin-top: -2px; margin-bottom: 18px; text-align: left; }
+
+    .conclusion-box { font-size: 9pt; color: #1e293b; margin-top: 20px; padding: 14px 16px; background-color: #f1f5f9; border-left: 6px solid #1d4ed8; }
+    .conclusion-box h3 { margin: 0 0 8px 0; font-size: 10pt; color: #0f172a; }
+    .conclusion-box ul { margin: 0; padding-left: 20px; }
+    .conclusion-box li { margin-bottom: 5px; }
+
+    /* ── DONATE BUTTON ── */
+    .donate-fab-wrap { position: fixed; right: 16px; bottom: 16px; z-index: 9999; }
+    .donate-fab {
+        display: flex; align-items: center; gap: 6px;
+        background: #0f172a; color: #f8fafc; border: none; cursor: pointer;
+        font-family: inherit; font-size: 9.5pt; font-weight: 700;
+        padding: 11px 18px; border-radius: 999px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        text-decoration: none;
+    }
+    .donate-fab:active { transform: scale(0.96); }
+</style>
+</head>
+<body>
+
+    <div class="document-header">
+        <h1>Hasil Test 3DMark Stress Test</h1>
+        <div class="subtitle">Integrasi Data 10 Juni (Case DIY) &amp; 20 Juni 2026 (A1 Modif, Legendary, Polosan)</div>
+    </div>
+
+    <div class="page-content">
+
+    <div class="legend">
+        <span><span class="legend-dot dot-good"></span>Hijau = Hasil Terbaik di baris itu</span>
+        <span><span class="legend-dot dot-danger"></span>Merah = Hasil Terburuk di baris itu</span>
+    </div>
+
+    <!-- ══ SECTION 1: PERFORMA ══════════════════════════════════ -->
+    <h2>1. Hasil Performa (Skor &amp; Stabilitas)</h2>
+    <div class="mini-summary">🏆 Skor tertinggi → TH28 Legendary (10.900) · Skor terendah paling tinggi → TH28 A1 Modif (10.686) · Stabilitas terbaik → TH28 Case DIY (98.4%)</div>
+    <p class="scroll-hint">← geser tabel →</p>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th class="parameter-col">Parameter Pengujian</th>
+                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">Kazura Z1 Pro+<br><span class="th-sub">Case DIY*</span></th>
+                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">TH28 Pro<br><span class="th-sub">Case DIY*</span></th>
+                <th title="Polosan (Tanpa Heatsink)">TH28 Pro<br><span class="th-sub">Polosan</span></th>
+                <th>TH28 Pro<br><span class="th-sub">Heatsink Legendary</span></th>
+                <th>TH28 Pro<br><span class="th-sub">Heatsink A1 Modif</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="time-row">
+                <td class="parameter-col">Tanggal &amp; Waktu Pengujian</td>
+                <td>10 Juni 2026<br>13:19–13:41 WIB</td>
+                <td>10 Juni 2026<br>13:46–14:07 WIB</td>
+                <td>20 Juni 2026<br>16:06–16:27 WIB</td>
+                <td>20 Juni 2026<br>16:43–17:04 WIB</td>
+                <td>20 Juni 2026<br>15:35–15:56 WIB</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Skor Tertinggi (Best Loop)</td>
+                <td>10.783</td>
+                <td>10.741</td>
+                <td>10.794</td>
+                <td class="status-good">10.900</td>
+                <td>10.871</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Skor Terendah (Lowest Loop)</td>
+                <td>10.590</td>
+                <td>10.573</td>
+                <td>10.533</td>
+                <td>10.625</td>
+                <td class="status-good">10.686</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Stabilitas Performa</td>
+                <td>98.2%</td>
+                <td class="status-good">98.4%</td>
+                <td>97.6%</td>
+                <td>97.5%</td>
+                <td>98.3%</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Arahkan kursor ke header kolom untuk keterangan lengkap.</div>
+
+    <!-- ══ SECTION 2: TERMODINAMIKA ═════════════════════════════ -->
+    <h2>2. Termodinamika (Pre-cooling &amp; Titik Didih)</h2>
+    <div class="mini-summary">🏆 Suhu akhir baterai terbaik → TH28 Polosan (37,0°C) · Suhu akhir CPU terbaik → TH28 Case DIY (43,8°C) · Delta CPU terbaik → TH28 A1 Modif (+11,1°C)</div>
+    <p class="scroll-hint">← geser tabel →</p>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th class="parameter-col">Parameter Pengujian</th>
+                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">Kazura Z1 Pro+<br><span class="th-sub">Case DIY*</span></th>
+                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">TH28 Pro<br><span class="th-sub">Case DIY*</span></th>
+                <th title="Polosan (Tanpa Heatsink)">TH28 Pro<br><span class="th-sub">Polosan</span></th>
+                <th>TH28 Pro<br><span class="th-sub">Heatsink Legendary</span></th>
+                <th>TH28 Pro<br><span class="th-sub">Heatsink A1 Modif</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="time-row">
+                <td class="parameter-col">Tanggal &amp; Waktu Pengujian</td>
+                <td>10 Juni 2026<br>13:19–13:41 WIB</td>
+                <td>10 Juni 2026<br>13:46–14:07 WIB</td>
+                <td>20 Juni 2026<br>16:06–16:27 WIB</td>
+                <td>20 Juni 2026<br>16:43–17:04 WIB</td>
+                <td>20 Juni 2026<br>15:35–15:56 WIB</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Suhu Awal (Baterai | CPU)</td>
+                <td>29,2°C | 32,3°C</td>
+                <td>28,1°C | 31,5°C</td>
+                <td>29,0°C | 31,7°C</td>
+                <td>28,8°C | 32,9°C</td>
+                <td>29,6°C | 32,9°C</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Suhu Akhir Baterai</td>
+                <td class="status-danger">39,5°C</td>
+                <td>38,9°C</td>
+                <td class="status-good">37,0°C</td>
+                <td>37,7°C</td>
+                <td>37,6°C</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Suhu Akhir CPU</td>
+                <td>45,6°C</td>
+                <td class="status-good">43,8°C</td>
+                <td>45,1°C</td>
+                <td class="status-danger">46,0°C</td>
+                <td>44,0°C</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Lonjakan Panas (Delta)</td>
+                <td>Bat: +10,3°C<br><span class="status-danger">CPU: +13,3°C</span></td>
+                <td>Bat: +10,8°C<br>CPU: +12,3°C</td>
+                <td><span class="status-good">Bat: +8,0°C</span><br><span class="status-danger">CPU: +13,4°C</span></td>
+                <td>Bat: +8,9°C<br>CPU: +13,1°C</td>
+                <td><span class="status-good">Bat: +8,0°C</span><br><span class="status-good">CPU: +11,1°C</span></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Arahkan kursor ke header kolom untuk keterangan lengkap.</div>
+
+    <!-- ══ SECTION 3: KONSUMSI DAYA ═════════════════════════════ -->
+    <h2>3. Konsumsi Daya</h2>
+    <div class="mini-summary">🏆 Paling irit (turun paling sedikit) → Kazura Case DIY &amp; TH28 A1 Modif, sama-sama turun 14%</div>
+    <p class="scroll-hint">← geser tabel →</p>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th class="parameter-col">Parameter Pengujian</th>
+                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">Kazura Z1 Pro+<br><span class="th-sub">Case DIY*</span></th>
+                <th title="Case Modif DIY (Tanpa tambalan thermal paste)">TH28 Pro<br><span class="th-sub">Case DIY*</span></th>
+                <th title="Polosan (Tanpa Heatsink)">TH28 Pro<br><span class="th-sub">Polosan</span></th>
+                <th>TH28 Pro<br><span class="th-sub">Heatsink Legendary</span></th>
+                <th>TH28 Pro<br><span class="th-sub">Heatsink A1 Modif</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="time-row">
+                <td class="parameter-col">Tanggal &amp; Waktu Pengujian</td>
+                <td>10 Juni 2026<br>13:19–13:41 WIB</td>
+                <td>10 Juni 2026<br>13:46–14:07 WIB</td>
+                <td>20 Juni 2026<br>16:06–16:27 WIB</td>
+                <td>20 Juni 2026<br>16:43–17:04 WIB</td>
+                <td>20 Juni 2026<br>15:35–15:56 WIB</td>
+            </tr>
+            <tr>
+                <td class="parameter-col">Konsumsi Baterai (20 Loop)</td>
+                <td class="status-good">Turun 14%<br>(74% ➔ 60%)</td>
+                <td class="status-danger">Turun 17%<br>(60% ➔ 43%)</td>
+                <td>Turun 15%<br>(63% ➔ 48%)</td>
+                <td class="status-danger">Turun 17%<br>(45% ➔ 28%)</td>
+                <td class="status-good">Turun 14%<br>(78% ➔ 64%)</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Arahkan kursor ke header kolom untuk keterangan lengkap.</div>
+
+    <div class="conclusion-box">
+        <h3>*Kesimpulan Mutlak</h3>
+        <ul>
+            <li>Konfigurasi termal paling superior secara keseluruhan: <strong>TH28 + Heatsink A1 Modif</strong>.</li>
+            <li>Mencatatkan Delta CPU terendah: <strong>+11,1°C</strong>.</li>
+            <li>Stabilitas performa sangat tinggi: <strong>98,3%</strong>.</li>
+            <li>Drainase baterai seefisien cooler 20W: <strong>turun 14%</strong>.</li>
+            <li>Catatan: <strong>Heatsink Legendary</strong> terbukti memiliki hambatan termal yang buruk untuk penyebaran jangka panjang (suhu akhir CPU tembus <strong>46,0°C</strong>).</li>
+        </ul>
+    </div>
+
+    </div><!-- /.page-content -->
+
+    <!-- ▼▼ Tombol Donate ▼▼ -->
+    <div class="donate-fab-wrap">
+        <a class="donate-fab" id="donateLink" href="#" target="_blank" rel="noopener noreferrer">❤️ Donate</a>
+    </div>
+    <script>
+        // 🔧 GANTI baris di bawah ini dengan path/URL foto donasi kamu
+        // Saran: taruh foto di repo yang sama, misal di folder "images/donate.jpg"
+        const DONATE_PHOTO_URL = "images/donate.png";
+        document.getElementById('donateLink').href = DONATE_PHOTO_URL;
+    </script>
+    <!-- ▲▲ Tombol Donate ▲▲ -->
+
+</body>
 </html>
