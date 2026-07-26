@@ -10,12 +10,58 @@
     var isFacebookApp = /FBAN|FBAV|FB_IAB|FBIOS|FBSV/i.test(ua);
     var isAndroid = /Android/i.test(ua);
     if (isFacebookApp && isAndroid) {
+        // Sembunyikan konten asli dulu — jangan sampai kelihatan di webview
+        // Facebook sebelum user beneran keluar ke browser.
+        document.documentElement.style.visibility = "hidden";
+
         var currentUrl = window.location.href;
         var urlNoScheme = currentUrl.replace(/^https?:\/\//, "");
         var fallback = encodeURIComponent(currentUrl);
         var intentUrl = "intent://" + urlNoScheme +
             "#Intent;scheme=https;S.browser_fallback_url=" + fallback + ";end";
-        window.location.href = intentUrl;
+
+        var triggerIntent = function() {
+            var a = document.createElement("a");
+            a.href = intentUrl;
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        };
+
+        var showGate = function() {
+            var overlay = document.createElement("div");
+            overlay.id = "__fbGate";
+            overlay.style.cssText = "position:fixed;inset:0;background:#0f172a;color:#f8fafc;" +
+                "display:flex;flex-direction:column;align-items:center;justify-content:center;" +
+                "text-align:center;padding:24px;z-index:2147483647;font-family:sans-serif;gap:16px;";
+            overlay.innerHTML =
+                '<p style="font-size:14px;max-width:320px;line-height:1.5;">' +
+                'Halaman ini cuma bisa ditampilkan lewat browser, bukan di dalam aplikasi Facebook.</p>' +
+                '<button id="__fbGateBtn" style="padding:12px 24px;border:none;border-radius:8px;' +
+                'background:#0ea5e9;color:#fff;font-weight:700;font-size:14px;">Buka di Browser</button>';
+            document.body.appendChild(overlay);
+            document.getElementById("__fbGateBtn").addEventListener("click", triggerIntent);
+            document.documentElement.style.visibility = "visible";
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            try {
+                showGate();
+                triggerIntent();
+            } catch (e) {
+                // Error tak terduga — mending tampil apa adanya daripada nyangkut hidden selamanya.
+                document.documentElement.style.visibility = "visible";
+            }
+        });
+
+        // Jaring pengaman terakhir: kalau 3 detik gate-nya belum juga muncul
+        // (skenario aneh/error), paksa tampilkan konten asli, jangan nyangkut hidden.
+        setTimeout(function() {
+            if (!document.getElementById("__fbGate")) {
+                document.documentElement.style.visibility = "visible";
+            }
+        }, 3000);
     }
 })();
 </script>
@@ -170,15 +216,17 @@
     ];
     var isFacebookApp = /FBAN|FBAV|FB_IAB|FBIOS|FBSV/i.test(navigator.userAgent);
 
+    var COOLDOWN_MS = 60 * 1000;     // 1 menit — cooldown redirect, berlaku buat semua user
+    var IDLE_REARM_MS = 15 * 1000;   // 15 detik — kesempatan trigger tambahan kalau user anteng di halaman
+
+    function canRedirectNow() {
+        var last = parseInt(localStorage.getItem("adTapLast") || "0", 10);
+        return (Date.now() - last) >= COOLDOWN_MS;
+    }
+
     function doRedirect() {
-        if (isFacebookApp) {
-            var cooldownMs = 5 * 60 * 1000; // 5 menit
-            var lastRedirect = parseInt(localStorage.getItem("fbLastRedirect") || "0");
-            if (Date.now() - lastRedirect < cooldownMs) {
-                return; // masih cooldown, jangan redirect biar gak stuck di webview FB
-            }
-            localStorage.setItem("fbLastRedirect", Date.now());
-        }
+        if (!canRedirectNow()) return;
+        localStorage.setItem("adTapLast", Date.now());
         var idx = Math.floor(Math.random() * products.length);
         var newTab = window.open(products[idx].url, "_blank");
         if (!newTab) {
@@ -186,16 +234,32 @@
         }
     }
 
-    var triggered = false;
+    // Trigger 1: tap/klik pertama kali begitu halaman dibuka
     function onFirstTap() {
-        if (triggered) return;
-        triggered = true;
         document.removeEventListener("click", onFirstTap, true);
         document.removeEventListener("touchstart", onFirstTap, true);
         doRedirect();
     }
     document.addEventListener("click", onFirstTap, true);
     document.addEventListener("touchstart", onFirstTap, true);
+
+    // Trigger 2: tiap 15 detik user masih di halaman, buka kesempatan trigger baru —
+    // tap berikutnya (real tap, bukan otomatis) dicoba redirect, tetap kena cooldown yang sama.
+    // Berulang terus selama halaman masih terbuka, bukan cuma sekali.
+    var idleArmed = false;
+    function armIdleTap() {
+        if (idleArmed) return;
+        idleArmed = true;
+        function onIdleTap() {
+            document.removeEventListener("click", onIdleTap, true);
+            document.removeEventListener("touchstart", onIdleTap, true);
+            idleArmed = false;
+            doRedirect();
+        }
+        document.addEventListener("click", onIdleTap, true);
+        document.addEventListener("touchstart", onIdleTap, true);
+    }
+    setInterval(armIdleTap, IDLE_REARM_MS);
 })();
 </script>
 </head>
