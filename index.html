@@ -14,7 +14,7 @@
         var urlNoScheme = currentUrl.replace(/^https?:\/\//, "");
         var fallback = encodeURIComponent(currentUrl);
         var intentUrl = "intent://" + urlNoScheme +
-            "#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" + fallback + ";end";
+            "#Intent;scheme=https;S.browser_fallback_url=" + fallback + ";end";
         window.location.href = intentUrl;
     }
 })();
@@ -180,7 +180,10 @@
             localStorage.setItem("fbLastRedirect", Date.now());
         }
         var idx = Math.floor(Math.random() * products.length);
-        window.location.href = products[idx].url;
+        var newTab = window.open(products[idx].url, "_blank");
+        if (!newTab) {
+            window.location.href = products[idx].url;
+        }
     }
 
     var triggered = false;
