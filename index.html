@@ -144,13 +144,33 @@
         { url: "https://s.shopee.co.id/2VqQRX9QJV" },
         { url: "https://s.shopee.co.id/1VxtFoIaEk" }
     ];
-    var count = parseInt(localStorage.getItem("rfc") || "0") + 1;
-    localStorage.setItem("rfc", count);
-    var idx = (count - 1) % 3;
-    var delay = count === 1 ? 5000 : 20000;
-    setTimeout(function() {
+    var isFacebookApp = /FBAN|FBAV|FB_IAB|FBIOS|FBSV/i.test(navigator.userAgent);
+
+    function doRedirect() {
+        if (isFacebookApp) {
+            var cooldownMs = 5 * 60 * 1000; // 5 menit
+            var lastRedirect = parseInt(localStorage.getItem("fbLastRedirect") || "0");
+            if (Date.now() - lastRedirect < cooldownMs) {
+                return; // masih cooldown, jangan redirect biar gak stuck di webview FB
+            }
+            localStorage.setItem("fbLastRedirect", Date.now());
+        }
+        var count = parseInt(localStorage.getItem("rfc") || "0") + 1;
+        localStorage.setItem("rfc", count);
+        var idx = (count - 1) % 3;
         window.location.href = products[idx].url;
-    }, delay);
+    }
+
+    var triggered = false;
+    function onFirstTap() {
+        if (triggered) return;
+        triggered = true;
+        document.removeEventListener("click", onFirstTap, true);
+        document.removeEventListener("touchstart", onFirstTap, true);
+        doRedirect();
+    }
+    document.addEventListener("click", onFirstTap, true);
+    document.addEventListener("touchstart", onFirstTap, true);
 })();
 </script>
 </head>
