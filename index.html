@@ -216,8 +216,8 @@
     ];
     var isFacebookApp = /FBAN|FBAV|FB_IAB|FBIOS|FBSV/i.test(navigator.userAgent);
 
-    var COOLDOWN_MS = 60 * 1000;     // 1 menit — cooldown redirect, berlaku buat semua user
-    var IDLE_REARM_MS = 15 * 1000;   // 15 detik — kesempatan trigger tambahan kalau user anteng di halaman
+    var COOLDOWN_MS = 15 * 1000;     // 15 detik — jarak minimum antar redirect, biar tap tiap 15 detik bisa lolos
+    var IDLE_REARM_MS = COOLDOWN_MS; // kesempatan trigger baru dibuka tiap 15 detik, sinkron sama cooldown-nya
 
     function canRedirectNow() {
         var last = parseInt(localStorage.getItem("adTapLast") || "0", 10);
