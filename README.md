@@ -1,61 +1,88 @@
-# 3DMark Lab
+<h1 align="center">3DMark Lab</h1>
 
 <p align="center">
-  <strong>3DMark Benchmark Assets & Test Archive</strong><br>
-  A lightweight repository for benchmark screenshots, results, and supporting assets.
+  <b>Benchmark archive for performance results, screenshots, and test assets.</b><br>
+  A clean place to keep 3DMark records organized and easy to inspect.
 </p>
 
 <p align="center">
-  <a href="https://github.com/RIFQIBOTZ/3dmark">Repository</a> ·
-  <a href="https://github.com/RIFQIBOTZ/3dmark/tree/main/images">Images</a>
+  <img alt="status" src="https://img.shields.io/badge/status-active-0ea5e9?style=for-the-badge">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge">
+  <img alt="type" src="https://img.shields.io/badge/type-benchmark%20archive-8b5cf6?style=for-the-badge">
 </p>
 
 ---
 
-## Overview
+## About
 
-3DMark Lab is a simple archive for organizing 3DMark benchmark assets and test records.
+**3DMark Lab** is a lightweight archive for collecting 3DMark benchmark screenshots, results, and supporting visual assets.
 
-The repository keeps the structure intentionally minimal so benchmark images and related files can be accessed quickly without a build system or framework.
+It is intentionally simple: no framework, no build process, and no unnecessary project overhead. Just organized benchmark material that can be opened and reviewed quickly.
 
-## What’s Inside
+## At a glance
 
-- Benchmark screenshots and images
-- Organized visual assets
-- Lightweight repository structure
-- Easy-to-browse archive
+| Category | Details |
+|---|---|
+| Purpose | 3DMark benchmark archive |
+| Assets | Screenshots & test images |
+| Structure | Minimal and organized |
+| Workflow | Add → label → archive → compare |
+| Stack | Static repository |
 
-## Project Structure
+## Repository structure
 
 ```text
 3dmark/
-├── images/         # Benchmark screenshots and assets
+├── images/         # Benchmark screenshots & visual assets
 └── README.md       # Project documentation
 ```
 
-## Usage
+## Naming convention
 
-Clone the repository:
-
-```bash
-git clone https://github.com/RIFQIBOTZ/3dmark.git
-cd 3dmark
-```
-
-Open the files inside `images/` to view the archived benchmark assets.
-
-## Asset Guidelines
-
-Keep benchmark files inside `images/` and use descriptive filenames so results remain easy to identify and compare.
-
-Example:
+Use filenames that tell you what the image contains without opening it.
 
 ```text
 images/
-├── device-test-01.png
-├── device-test-02.png
-└── benchmark-result.png
+├── device-name-test-01.png
+├── device-name-test-02.png
+├── benchmark-result.png
+└── comparison-final.png
 ```
+
+For larger collections, keep the same naming pattern across devices and test runs.
+
+## Benchmark workflow
+
+```text
+Run benchmark
+      ↓
+Capture result
+      ↓
+Rename asset
+      ↓
+Store in /images
+      ↓
+Compare results
+```
+
+## Why keep an archive?
+
+Benchmark results are useful when they can be compared over time. Keeping screenshots and records together makes it easier to spot changes after:
+
+- driver updates
+- system changes
+- cooling changes
+- configuration changes
+- hardware changes
+
+## Roadmap
+
+- [x] Organized image archive
+- [x] Simple repository structure
+- [x] Descriptive asset naming
+- [ ] Add benchmark metadata
+- [ ] Add result tables
+- [ ] Add historical comparisons
 
 ## License
 
@@ -64,5 +91,5 @@ MIT License
 ---
 
 <p align="center">
-  <sub>Built as a lightweight personal benchmark archive.</sub>
+  <sub>Benchmark data in. Clutter out.</sub>
 </p>
