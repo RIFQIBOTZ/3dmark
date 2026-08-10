@@ -1,45 +1,93 @@
-<h1 align="center">3DMark Lab</h1>
+<div align="center">
 
-<p align="center">
-  <b>Benchmark archive for performance results, screenshots, and test assets.</b><br>
-  A clean place to keep 3DMark records organized and easy to inspect.
-</p>
+# 🌈 3DMARK LAB ⚡
 
-<p align="center">
-  <img alt="status" src="https://img.shields.io/badge/status-active-0ea5e9?style=for-the-badge">
-  <img alt="license" src="https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge">
-  <img alt="type" src="https://img.shields.io/badge/type-benchmark%20archive-8b5cf6?style=for-the-badge">
-</p>
+### `GPU BENCHMARK // PERFORMANCE // SCORE ARCHIVE`
+
+<img src="https://img.shields.io/badge/RGB-FF0080?style=for-the-badge&labelColor=09090b&color=ff0080" alt="RGB"> <img src="https://img.shields.io/badge/NEON-00E5FF?style=for-the-badge&labelColor=09090b&color=00e5ff" alt="Neon"> <img src="https://img.shields.io/badge/BENCHMARK-39FF14?style=for-the-badge&labelColor=09090b&color=39ff14" alt="Benchmark"> <img src="https://img.shields.io/badge/LICENSE-MIT?style=for-the-badge&labelColor=09090b&color=ffd000" alt="License">
+
+> **A neon benchmark archive for screenshots, scores, hardware tests, and performance history.**
+
+</div>
 
 ---
 
-## About
+## ⚡ `SYSTEM // OVERVIEW`
 
-**3DMark Lab** is a lightweight archive for collecting 3DMark benchmark screenshots, results, and supporting visual assets.
+**3DMark Lab** is a visual archive for keeping benchmark results together instead of scattering screenshots across a gallery.
 
-It is intentionally simple: no framework, no build process, and no unnecessary project overhead. Just organized benchmark material that can be opened and reviewed quickly.
+<table>
+<tr><td>🎯 <b>MISSION</b></td><td>Archive & compare benchmark performance</td></tr>
+<tr><td>🖥️ <b>DATA</b></td><td>Scores, screenshots & test assets</td></tr>
+<tr><td>🌈 <b>STYLE</b></td><td>RGB / Neon / Gaming Lab</td></tr>
+<tr><td>📁 <b>STORAGE</b></td><td>Organized image archive</td></tr>
+<tr><td>🪶 <b>STACK</b></td><td>Lightweight static repository</td></tr>
+</table>
 
-## At a glance
+---
 
-| Category | Details |
-|---|---|
-| Purpose | 3DMark benchmark archive |
-| Assets | Screenshots & test images |
-| Structure | Minimal and organized |
-| Workflow | Add → label → archive → compare |
-| Stack | Static repository |
+## 🚀 `BENCHMARK // MODULES`
 
-## Repository structure
+| Module | Function |
+|:---:|---|
+| 🧪 | **Benchmark Runs** — store results from individual tests |
+| 🖥️ | **GPU / Device Records** — keep hardware context attached |
+| 📊 | **Score Archive** — make historical results easy to compare |
+| 📸 | **Screenshot Vault** — preserve visual benchmark evidence |
+| ⚡ | **Performance Tracking** — observe changes after configuration updates |
+
+---
+
+## 💿 `DIRECTORY // MAP`
 
 ```text
-3dmark/
-├── images/         # Benchmark screenshots & visual assets
-└── README.md       # Project documentation
+┌─ 3dmark/
+│
+├── 🌈 images/          → Benchmark screenshots & assets
+└── 📘 README.md        → Project documentation
 ```
 
-## Naming convention
+---
 
-Use filenames that tell you what the image contains without opening it.
+## 🧬 `BENCHMARK // PIPELINE`
+
+```text
+[ HARDWARE / CONFIG ]
+          │
+          ▼
+[ 3DMARK TEST RUN ]
+          │
+          ├── ⚡ SCORE
+          ├── 📈 FPS / PERFORMANCE
+          ├── 🖥️ DEVICE INFO
+          └── 📸 SCREENSHOT
+          │
+          ▼
+[ 3DMARK LAB ]
+          │
+          ▼
+[ ARCHIVE // COMPARE // REPEAT ]
+```
+
+---
+
+## 🌈 `RGB // VISUAL LANGUAGE`
+
+The repository uses a **dark neon gaming** aesthetic: high-contrast labels, RGB accents, and compact benchmark-style information blocks.
+
+`#FF0080` **PINK** · `#00E5FF` **CYAN** · `#39FF14` **GREEN** · `#FFD000` **YELLOW** · `#8B5CF6` **PURPLE**
+
+- 🟢 **GREEN** → high / improved performance
+- 🔵 **CYAN** → normal benchmark information
+- 🟣 **PURPLE** → hardware / configuration
+- 🟡 **YELLOW** → highlighted result
+- 🔴 **PINK** → warning / unusual result
+
+---
+
+## 📸 `ASSET // NAMING`
+
+Keep filenames descriptive so an archive can scale without becoming a mess.
 
 ```text
 images/
@@ -51,45 +99,49 @@ images/
 
 For larger collections, keep the same naming pattern across devices and test runs.
 
-## Benchmark workflow
+---
+
+## 🔄 `WORKFLOW // LOOP`
 
 ```text
-Run benchmark
-      ↓
-Capture result
-      ↓
-Rename asset
-      ↓
-Store in /images
-      ↓
-Compare results
+RUN
+ ↓
+CAPTURE
+ ↓
+LABEL
+ ↓
+ARCHIVE
+ ↓
+COMPARE
+ ↓
+TUNE
+ ↓
+RUN AGAIN
 ```
-
-## Why keep an archive?
-
-Benchmark results are useful when they can be compared over time. Keeping screenshots and records together makes it easier to spot changes after:
-
-- driver updates
-- system changes
-- cooling changes
-- configuration changes
-- hardware changes
-
-## Roadmap
-
-- [x] Organized image archive
-- [x] Simple repository structure
-- [x] Descriptive asset naming
-- [ ] Add benchmark metadata
-- [ ] Add result tables
-- [ ] Add historical comparisons
-
-## License
-
-MIT License
 
 ---
 
-<p align="center">
-  <sub>Benchmark data in. Clutter out.</sub>
-</p>
+## 🛠️ `ROADMAP // vNEXT`
+
+```text
+[x] Organized benchmark image archive
+[x] Descriptive asset naming
+[x] RGB / neon visual direction
+[ ] Benchmark metadata files
+[ ] Score comparison tables
+[ ] Historical performance graphs
+[ ] Device ranking system
+[ ] Automated benchmark index
+```
+
+---
+
+<div align="center">
+
+### ⚡ `BENCH. COMPARE. REPEAT.` ⚡
+
+`GPU LAB // RGB MODE // PERFORMANCE ONLINE`
+
+**MIT License**
+
+</div>
