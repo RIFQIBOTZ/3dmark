@@ -22,18 +22,6 @@ A simple archive for 3DMark benchmark screenshots, results, and test assets.
 └── README.md
 ```
 
-## Naming
-
-Use descriptive filenames so files remain easy to identify without opening them.
-
-```text
-images/
-├── device-name-test-01.png
-├── device-name-test-02.png
-├── benchmark-result.png
-└── comparison-final.png
-```
-
 ## Usage
 
 ```bash
