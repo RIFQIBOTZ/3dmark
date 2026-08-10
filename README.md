@@ -1,93 +1,30 @@
-<div align="center">
+# 3DMark Lab
 
-# 🌈 3DMARK LAB ⚡
+A simple archive for 3DMark benchmark screenshots, results, and test assets.
 
-### `GPU BENCHMARK // PERFORMANCE // SCORE ARCHIVE`
+## Overview
 
-<img src="https://img.shields.io/badge/RGB-FF0080?style=for-the-badge&labelColor=09090b&color=ff0080" alt="RGB"> <img src="https://img.shields.io/badge/NEON-00E5FF?style=for-the-badge&labelColor=09090b&color=00e5ff" alt="Neon"> <img src="https://img.shields.io/badge/BENCHMARK-39FF14?style=for-the-badge&labelColor=09090b&color=39ff14" alt="Benchmark"> <img src="https://img.shields.io/badge/LICENSE-MIT?style=for-the-badge&labelColor=09090b&color=ffd000" alt="License">
+3DMark Lab keeps benchmark material organized so results can be reviewed and compared over time without unnecessary project overhead.
 
-> **A neon benchmark archive for screenshots, scores, hardware tests, and performance history.**
+## Contents
 
-</div>
+- benchmark screenshots
+- performance results
+- hardware and test records
+- comparison assets
+- organized image archive
 
----
-
-## ⚡ `SYSTEM // OVERVIEW`
-
-**3DMark Lab** is a visual archive for keeping benchmark results together instead of scattering screenshots across a gallery.
-
-<table>
-<tr><td>🎯 <b>MISSION</b></td><td>Archive & compare benchmark performance</td></tr>
-<tr><td>🖥️ <b>DATA</b></td><td>Scores, screenshots & test assets</td></tr>
-<tr><td>🌈 <b>STYLE</b></td><td>RGB / Neon / Gaming Lab</td></tr>
-<tr><td>📁 <b>STORAGE</b></td><td>Organized image archive</td></tr>
-<tr><td>🪶 <b>STACK</b></td><td>Lightweight static repository</td></tr>
-</table>
-
----
-
-## 🚀 `BENCHMARK // MODULES`
-
-| Module | Function |
-|:---:|---|
-| 🧪 | **Benchmark Runs** — store results from individual tests |
-| 🖥️ | **GPU / Device Records** — keep hardware context attached |
-| 📊 | **Score Archive** — make historical results easy to compare |
-| 📸 | **Screenshot Vault** — preserve visual benchmark evidence |
-| ⚡ | **Performance Tracking** — observe changes after configuration updates |
-
----
-
-## 💿 `DIRECTORY // MAP`
+## Structure
 
 ```text
-┌─ 3dmark/
-│
-├── 🌈 images/          → Benchmark screenshots & assets
-└── 📘 README.md        → Project documentation
+3dmark/
+├── images/
+└── README.md
 ```
 
----
+## Naming
 
-## 🧬 `BENCHMARK // PIPELINE`
-
-```text
-[ HARDWARE / CONFIG ]
-          │
-          ▼
-[ 3DMARK TEST RUN ]
-          │
-          ├── ⚡ SCORE
-          ├── 📈 FPS / PERFORMANCE
-          ├── 🖥️ DEVICE INFO
-          └── 📸 SCREENSHOT
-          │
-          ▼
-[ 3DMARK LAB ]
-          │
-          ▼
-[ ARCHIVE // COMPARE // REPEAT ]
-```
-
----
-
-## 🌈 `RGB // VISUAL LANGUAGE`
-
-The repository uses a **dark neon gaming** aesthetic: high-contrast labels, RGB accents, and compact benchmark-style information blocks.
-
-`#FF0080` **PINK** · `#00E5FF` **CYAN** · `#39FF14` **GREEN** · `#FFD000` **YELLOW** · `#8B5CF6` **PURPLE**
-
-- 🟢 **GREEN** → high / improved performance
-- 🔵 **CYAN** → normal benchmark information
-- 🟣 **PURPLE** → hardware / configuration
-- 🟡 **YELLOW** → highlighted result
-- 🔴 **PINK** → warning / unusual result
-
----
-
-## 📸 `ASSET // NAMING`
-
-Keep filenames descriptive so an archive can scale without becoming a mess.
+Use descriptive filenames so files remain easy to identify without opening them.
 
 ```text
 images/
@@ -97,51 +34,19 @@ images/
 └── comparison-final.png
 ```
 
-For larger collections, keep the same naming pattern across devices and test runs.
+## Usage
 
----
-
-## 🔄 `WORKFLOW // LOOP`
-
-```text
-RUN
- ↓
-CAPTURE
- ↓
-LABEL
- ↓
-ARCHIVE
- ↓
-COMPARE
- ↓
-TUNE
- ↓
-RUN AGAIN
+```bash
+git clone https://github.com/RIFQIBOTZ/3dmark.git
+cd 3dmark
 ```
 
----
+Open the files in `images/` to view the archived benchmark results.
 
-## 🛠️ `ROADMAP // vNEXT`
+## Notes
 
-```text
-[x] Organized benchmark image archive
-[x] Descriptive asset naming
-[x] RGB / neon visual direction
-[ ] Benchmark metadata files
-[ ] Score comparison tables
-[ ] Historical performance graphs
-[ ] Device ranking system
-[ ] Automated benchmark index
-```
+Benchmark results can vary with drivers, hardware configuration, cooling, system settings, and test conditions. Keep the test context with each result when possible.
 
----
+## License
 
-<div align="center">
-
-### ⚡ `BENCH. COMPARE. REPEAT.` ⚡
-
-`GPU LAB // RGB MODE // PERFORMANCE ONLINE`
-
-**MIT License**
-
-</div>
+MIT License
