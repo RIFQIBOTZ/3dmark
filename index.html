@@ -312,7 +312,7 @@
 <!-- ══ HEADER ══════════════════════════════════════════════════ -->
 <div class="header">
     <h1>Hasil Test 3DMark Stress Test</h1>
-    <p>Integrasi Data TH28, Kazura, T2 Basic Gen 2 &amp; TH28 Mod Decoy (34 Watt)</p>
+    <p>Integrasi Data TH28, Kazura, Ekosistem T2 (Basic &amp; Pro) &amp; TH28 Mod Decoy (34 Watt)</p>
 </div>
 
 <div class="legend">
@@ -342,6 +342,7 @@
                         <th>TH28 Pro<span class="th-sub">Heatsink A1 Modif</span></th>
                         <th>T2 Basic Gen 2<span class="th-sub">Case DIY (Paste)</span></th>
                         <th>TH28 Mod Decoy<span class="th-sub">Case DIY (34W)</span></th>
+                        <th>T2 Pro Gen3<span class="th-sub">Case DIY (Paste)</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -354,6 +355,7 @@
                         <td>20 Jun 26 | 15:35</td>
                         <td>23 Jul 26 | 16:38</td>
                         <td>02 Ags 26 | 16:58</td>
+                        <td>16 Ags 26 | 17:03</td>
                     </tr>
                     <tr>
                         <td class="param-col">Skor Tertinggi</td>
@@ -364,31 +366,35 @@
                         <td>10.871</td>
                         <td>10.787</td>
                         <td>10.803</td>
+                        <td>10.757</td>
                     </tr>
                     <tr>
                         <td class="param-col">Skor Terendah</td>
                         <td>10.590</td>
                         <td>10.573</td>
-                        <td class="status-danger">10.533</td>
+                        <td>10.533</td>
                         <td>10.625</td>
                         <td class="status-good">10.686</td>
                         <td>10.642</td>
                         <td>10.675</td>
+                        <td class="status-danger">9.647</td>
                     </tr>
                     <tr>
                         <td class="param-col">Stabilitas Performa</td>
                         <td>98.2%</td>
                         <td>98.4%</td>
                         <td>97.6%</td>
-                        <td class="status-danger">97.5%</td>
+                        <td>97.5%</td>
                         <td>98.3%</td>
                         <td>98.7%</td>
                         <td class="status-good">98.8%</td>
+                        <td class="status-danger">89.7%**</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <p class="footnote">*Case DIY = Case Modif DIY tanpa tambalan thermal paste. Geser tabel untuk lihat semua kolom.</p>
+        <p class="footnote">**Stabilitas 89,7% pada T2 Pro Gen3 dipicu mutlak oleh <i>Low Battery Throttling</i> (baterai drop dari 30% ke 14% selama tes), bukan karena <i>thermal throttling</i> (suhu CPU aman di 41,2°C).</p>
     </div>
 
     <!-- ══ SECTION 2: TERMODINAMIKA ═════════════════════════════ -->
@@ -397,7 +403,7 @@
             <span class="sec-num">2</span>
             <span class="sec-name">Termodinamika (Pre-cooling &amp; Titik Didih)</span>
         </div>
-        <div class="mini-summary">🏆 Suhu akhir &amp; Delta baterai terbaik → T2 Basic Gen 2 (36,1°C / +5,6°C) · Suhu akhir CPU terbaik → T2 Basic Gen 2 (43,5°C) · Delta CPU terbaik → TH28 A1 Modif (+11,1°C)</div>
+        <div class="mini-summary">🏆 Suhu akhir &amp; Delta baterai terbaik → T2 Pro Gen3 (34,3°C / +5,5°C) · Suhu akhir &amp; Delta CPU terbaik → T2 Pro Gen3 (41,2°C / +10,0°C)</div>
         <p class="scroll-hint">← geser tabel →</p>
         <div class="tbl-wrap">
             <table>
@@ -411,6 +417,7 @@
                         <th>TH28 Pro<span class="th-sub">Heatsink A1 Modif</span></th>
                         <th>T2 Basic Gen 2<span class="th-sub">Case DIY (Paste)</span></th>
                         <th>TH28 Mod Decoy<span class="th-sub">Case DIY (34W)</span></th>
+                        <th>T2 Pro Gen3<span class="th-sub">Case DIY (Paste)</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -423,6 +430,7 @@
                         <td>20 Jun 26 | 15:35</td>
                         <td>23 Jul 26 | 16:38</td>
                         <td>02 Ags 26 | 16:58</td>
+                        <td>16 Ags 26 | 17:03</td>
                     </tr>
                     <tr>
                         <td class="param-col">Suhu Awal (Bat | CPU)</td>
@@ -433,6 +441,7 @@
                         <td>29,6° | 32,9°</td>
                         <td>30,5° | 31,5°</td>
                         <td>29,0° | 31,5°</td>
+                        <td>28,8° | 31,2°</td>
                     </tr>
                     <tr>
                         <td class="param-col">Suhu Akhir Baterai</td>
@@ -441,8 +450,9 @@
                         <td>37,0°C</td>
                         <td>37,7°C</td>
                         <td>37,6°C</td>
-                        <td class="status-good">36,1°C</td>
+                        <td>36,1°C</td>
                         <td>36,6°C</td>
+                        <td class="status-good">34,3°C</td>
                     </tr>
                     <tr>
                         <td class="param-col">Suhu Akhir CPU</td>
@@ -451,8 +461,9 @@
                         <td>45,1°C</td>
                         <td class="status-danger">46,0°C</td>
                         <td>44,0°C</td>
-                        <td class="status-good">43,5°C</td>
+                        <td>43,5°C</td>
                         <td>45,0°C</td>
+                        <td class="status-good">41,2°C</td>
                     </tr>
                     <tr>
                         <td class="param-col">Lonjakan Panas (Δ)</td>
@@ -460,9 +471,10 @@
                         <td class="status-danger">Bat +10,8°<br>CPU +12,3°</td>
                         <td>Bat +8,0°<br>CPU +13,4°</td>
                         <td>Bat +8,9°<br>CPU +13,1°</td>
-                        <td class="status-good">Bat +8,0°<br>CPU +11,1°</td>
-                        <td class="status-good">Bat +5,6°<br>CPU +12,0°</td>
+                        <td>Bat +8,0°<br>CPU +11,1°</td>
+                        <td>Bat +5,6°<br>CPU +12,0°</td>
                         <td class="status-danger">Bat +7,6°<br>CPU +13,5°</td>
+                        <td class="status-good">Bat +5,5°<br>CPU +10,0°</td>
                     </tr>
                 </tbody>
             </table>
@@ -490,6 +502,7 @@
                         <th>TH28 Pro<span class="th-sub">Heatsink A1 Modif</span></th>
                         <th>T2 Basic Gen 2<span class="th-sub">Case DIY (Paste)</span></th>
                         <th>TH28 Mod Decoy<span class="th-sub">Case DIY (34W)</span></th>
+                        <th>T2 Pro Gen3<span class="th-sub">Case DIY (Paste)</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -502,6 +515,7 @@
                         <td>20 Jun 26 | 15:35</td>
                         <td>23 Jul 26 | 16:38</td>
                         <td>02 Ags 26 | 16:58</td>
+                        <td>16 Ags 26 | 17:03</td>
                     </tr>
                     <tr>
                         <td class="param-col">Konsumsi Baterai (20 Loop)</td>
@@ -512,6 +526,7 @@
                         <td class="status-good">▼14%<br>(78→64%)</td>
                         <td>▼16%<br>(64→48%)</td>
                         <td>▼16%<br>(62→46%)</td>
+                        <td>▼16%<br>(30→14%)</td>
                     </tr>
                 </tbody>
             </table>
@@ -523,9 +538,9 @@
     <div class="conclusion-box">
         <div class="cb-head">✅ Kesimpulan Mutlak</div>
         <ul>
-            <li><strong>TH28 Mod Decoy (34W)</strong> memecahkan rekor stabilitas performa tertinggi (<strong>98,8%</strong>), namun mencatatkan lonjakan suhu CPU paling buruk di antara semua peserta (<strong>+13,5°C</strong>) — tenaga tinggi tanpa transfer panas optimal jadi bottleneck termal di area CPU.</li>
-            <li><strong>T2 Basic Gen 2 (26W)</strong> memiliki suhu akhir baterai terdingin dengan lonjakan suhu minimal (hanya naik <strong>+5,6°C</strong>).</li>
-            <li>Rekor penahan lonjakan panas CPU terbaik di 3DMark tetap dipegang oleh <strong>TH28 + Heatsink A1 Modif</strong> (Delta CPU terendah <strong>+11,1°C</strong>).</li>
+            <li><strong>T2 Pro Gen3 (28W)</strong> adalah monster termodinamika paling superior di 3DMark. Ia merajai seluruh metrik pendinginan terdalam: Suhu Akhir Baterai terbaik (<strong>34,3°C</strong>), Suhu Akhir CPU terbaik (<strong>41,2°C</strong>), Delta Baterai paling rapat (<strong>+5,5°C</strong>), dan merebut rekor Delta CPU terbaik dari TH28 A1 Modif dengan angka penahanan ekstrem di <strong>+10,0°C</strong>.</li>
+            <li>Stabilitas T2 Pro Gen3 yang anjlok ke <strong>89,7%</strong> sama sekali bukan kegagalan cooler, melainkan intervensi sistem dari <i>Low Battery Throttling</i> karena baterai turun hingga level kritis 14%.</li>
+            <li><strong>TH28 Mod Decoy (34W)</strong> masih memegang rekor stabilitas murni tertinggi (<strong>98,8%</strong>), namun mencatatkan lonjakan suhu CPU paling buruk di antara semua peserta (<strong>+13,5°C</strong>) — tenaga tinggi tanpa transfer panas optimal jadi bottleneck termal di area CPU.</li>
             <li>Drainase baterai paling irit dipegang oleh Kazura (20W) &amp; TH28 A1 Modif (keduanya hanya menguras <strong>14%</strong>).</li>
             <li>Catatan: <strong>Heatsink Legendary</strong> terbukti memiliki hambatan termal yang buruk untuk penyebaran jangka panjang di 3DMark (suhu akhir CPU tembus <strong>46,0°C</strong>).</li>
         </ul>
